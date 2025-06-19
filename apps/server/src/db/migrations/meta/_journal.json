@@ -8,6 +8,13 @@
 			"when": 1750355644996,
 			"tag": "0000_gray_puma",
 			"breakpoints": true
+		},
+		{
+			"idx": 1,
+			"version": "7",
+			"when": 1750367580779,
+			"tag": "0001_thick_jackal",
+			"breakpoints": true
 		}
 	]
 }

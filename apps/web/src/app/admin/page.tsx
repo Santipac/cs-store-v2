@@ -9,7 +9,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
-import { authClient, type UserRole, getUserRole } from "@/lib/auth-client";
+import { authClient, getUserRole } from "@/lib/auth-client";
 
 export default function AdminPage() {
 	const router = useRouter();

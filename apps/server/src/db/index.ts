@@ -1,9 +1,10 @@
 import { drizzle } from "drizzle-orm/node-postgres";
-import * as schema from "./schema/auth";
+import * as auth from "./schema/auth";
+import * as product from "./schema/product";
 
 export const db = drizzle(process.env.DATABASE_URL || "", {
-	schema,
+	schema: {
+		...auth,
+		...product,
+	},
 });
-
-export type DbUser = typeof schema.user.$inferSelect;
-export type DbUserInsert = typeof schema.user.$inferInsert;

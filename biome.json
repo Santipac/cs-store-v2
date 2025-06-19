@@ -30,7 +30,8 @@
 		"rules": {
 			"recommended": true,
 			"correctness": {
-				"useExhaustiveDependencies": "info"
+				"useExhaustiveDependencies": "info",
+				"noUnusedImports": "error"
 			},
 			"nursery": {
 				"useSortedClasses": {
