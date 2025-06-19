@@ -1,6 +1,6 @@
-import { productsRouter } from "@/modules/products/routers";
-import { protectedProcedure, publicProcedure, router } from "@/lib/trpc";
-import { usersRouter } from "@/modules/users/routers";
+import { productsRouter } from "~/modules/products/routers";
+import { protectedProcedure, publicProcedure, router } from "~/lib/trpc";
+import { usersRouter } from "~/modules/users/routers";
 
 export const appRouter = router({
 	healthCheck: publicProcedure.query(() => {

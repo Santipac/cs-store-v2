@@ -1,6 +1,6 @@
-import { db } from "@/db";
-import { user } from "@/db/schema/auth";
-import { adminProcedure, router } from "@/lib/trpc";
+import { db } from "~/db";
+import { user } from "~/db/schema/auth";
+import { adminProcedure, router } from "~/lib/trpc";
 import { eq } from "drizzle-orm";
 import z from "zod/v4";
 

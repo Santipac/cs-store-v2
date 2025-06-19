@@ -5,7 +5,7 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { auth } from "./lib/auth";
 import { createContext } from "./lib/context";
-import { appRouter } from "./modules/app/routers/index";
+import { appRouter } from "./modules/app/routers";
 
 const app = new Hono();
 

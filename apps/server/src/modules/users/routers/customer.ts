@@ -1,4 +1,4 @@
-import { clientProcedure, router } from "@/lib/trpc";
+import { clientProcedure, router } from "~/lib/trpc";
 
 export const customerRouter = router({
 	getCustomerData: clientProcedure.query(({ ctx }) => {
