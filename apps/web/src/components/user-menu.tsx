@@ -1,5 +1,7 @@
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+"use client";
+
+import { LogOut, Settings, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -8,51 +10,69 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { authClient } from "@/lib/auth-client";
-import { Button } from "./ui/button";
-import { Skeleton } from "./ui/skeleton";
+import { authClient, type UserRole, getUserRole } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
-export default function UserMenu() {
+export function UserMenu() {
 	const router = useRouter();
-	const { data: session, isPending } = authClient.useSession();
+	const { data: session } = authClient.useSession();
 
-	if (isPending) {
-		return <Skeleton className="h-9 w-24" />;
-	}
+	const user = session?.user;
+	const userRole = getUserRole(user);
+
+	const handleSignOut = async () => {
+		await authClient.signOut();
+		router.push("/login");
+	};
 
 	if (!session) {
-		return (
-			<Button variant="outline" asChild>
-				<Link href="/login">Sign In</Link>
-			</Button>
-		);
+		return null;
 	}
+
+	const getRoleBadgeColor = (role: UserRole) => {
+		return role === "admin"
+			? "bg-red-100 text-red-800"
+			: "bg-blue-100 text-blue-800";
+	};
 
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="outline">{session.user.name}</Button>
+				<Button variant="ghost" className="relative h-8 w-8 rounded-full">
+					<User className="h-4 w-4" />
+				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="bg-card">
-				<DropdownMenuLabel>My Account</DropdownMenuLabel>
+			<DropdownMenuContent className="w-56" align="end" forceMount>
+				<DropdownMenuLabel className="font-normal">
+					<div className="flex flex-col space-y-1">
+						<p className="font-medium text-sm leading-none">{user?.name}</p>
+						<p className="text-muted-foreground text-xs leading-none">
+							{user?.email}
+						</p>
+						{userRole && (
+							<span
+								className={`inline-flex items-center rounded-full px-2.5 py-0.5 font-medium text-xs ${getRoleBadgeColor(userRole)}`}
+							>
+								{userRole === "admin" ? "Administrador" : "Cliente"}
+							</span>
+						)}
+					</div>
+				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>{session.user.email}</DropdownMenuItem>
-				<DropdownMenuItem asChild>
-					<Button
-						variant="destructive"
-						className="w-full"
-						onClick={() => {
-							authClient.signOut({
-								fetchOptions: {
-									onSuccess: () => {
-										router.push("/");
-									},
-								},
-							});
-						}}
-					>
-						Sign Out
-					</Button>
+				<DropdownMenuItem>
+					<Settings className="mr-2 h-4 w-4" />
+					<span>Settings</span>
+				</DropdownMenuItem>
+				{userRole === "admin" && (
+					<DropdownMenuItem onClick={() => router.push("/admin")}>
+						<Settings className="mr-2 h-4 w-4" />
+						<span>Panel de Admin</span>
+					</DropdownMenuItem>
+				)}
+				<DropdownMenuSeparator />
+				<DropdownMenuItem onClick={handleSignOut}>
+					<LogOut className="mr-2 h-4 w-4" />
+					<span>Log out</span>
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
