@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../index.css";
-import Header from "@/components/header";
 import Providers from "@/components/providers";
+import Header from "@/modules/app/components/header";
+import Footer from "@/modules/app/components/footer";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -30,10 +31,11 @@ export default function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
 				<Providers>
-					<div className="grid h-svh grid-rows-[auto_1fr]">
+					<main className="grid min-h-svh grid-rows-[auto_1fr]">
 						<Header />
 						{children}
-					</div>
+						<Footer />
+					</main>
 				</Providers>
 			</body>
 		</html>

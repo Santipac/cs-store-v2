@@ -1,18 +1,17 @@
+"use client";
+
 import { useForm } from "@tanstack/react-form";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import z from "zod/v4";
 import { authClient } from "@/lib/auth-client";
-import Loader from "./loader";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Loader from "@/components/loader";
+import Link from "next/link";
 
-export default function SignInForm({
-	onSwitchToSignUp,
-}: {
-	onSwitchToSignUp: () => void;
-}) {
+export default function SignInForm() {
 	const router = useRouter();
 	const { isPending } = authClient.useSession();
 
@@ -124,10 +123,10 @@ export default function SignInForm({
 			<div className="mt-4 text-center">
 				<Button
 					variant="link"
-					onClick={onSwitchToSignUp}
+					asChild
 					className="text-indigo-600 hover:text-indigo-800"
 				>
-					Need an account? Sign Up
+					<Link href="/auth/sign-up">Need an account? Sign Up</Link>
 				</Button>
 			</div>
 		</div>
