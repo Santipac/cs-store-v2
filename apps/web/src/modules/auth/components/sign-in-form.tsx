@@ -47,8 +47,13 @@ export default function SignInForm() {
 	}
 
 	return (
-		<div className="mx-auto mt-10 w-full max-w-md p-6">
-			<h1 className="mb-6 text-center font-bold text-3xl">Welcome Back</h1>
+		<section className="mx-auto mt-10 w-full space-y-4">
+			<section className="flex w-full flex-col items-center gap-2 text-center">
+				<h1 className="font-bold text-2xl">Login to your account</h1>
+				<p className="text-balance text-muted-foreground text-sm">
+					Enter your email below to login to your account
+				</p>
+			</section>
 
 			<form
 				onSubmit={(e) => {
@@ -56,12 +61,12 @@ export default function SignInForm() {
 					e.stopPropagation();
 					void form.handleSubmit();
 				}}
-				className="space-y-4"
+				className="grid gap-4"
 			>
-				<div>
+				<section>
 					<form.Field name="email">
 						{(field) => (
-							<div className="space-y-2">
+							<section className="space-y-2">
 								<Label htmlFor={field.name}>Email</Label>
 								<Input
 									id={field.name}
@@ -76,16 +81,24 @@ export default function SignInForm() {
 										{error?.message}
 									</p>
 								))}
-							</div>
+							</section>
 						)}
 					</form.Field>
-				</div>
+				</section>
 
-				<div>
+				<section>
 					<form.Field name="password">
 						{(field) => (
-							<div className="space-y-2">
-								<Label htmlFor={field.name}>Password</Label>
+							<section className="space-y-2">
+								<section className="flex items-center">
+									<Label htmlFor={field.name}>Password</Label>
+									<Link
+										href="/auth/forgot-password"
+										className="ml-auto text-sm underline-offset-4 hover:underline"
+									>
+										Forgot your password?
+									</Link>
+								</section>
 								<Input
 									id={field.name}
 									name={field.name}
@@ -99,10 +112,10 @@ export default function SignInForm() {
 										{error?.message}
 									</p>
 								))}
-							</div>
+							</section>
 						)}
 					</form.Field>
-				</div>
+				</section>
 
 				<form.Subscribe>
 					{(state) => (
@@ -116,16 +129,14 @@ export default function SignInForm() {
 					)}
 				</form.Subscribe>
 			</form>
-
-			<div className="mt-4 text-center">
-				<Button
-					variant="link"
-					asChild
-					className="text-indigo-600 hover:text-indigo-800"
-				>
-					<Link href="/auth/sign-up">Need an account? Sign Up</Link>
-				</Button>
-			</div>
-		</div>
+			<section className="mt-4 text-center">
+				<section className="text-center text-sm">
+					Don&apos;t have an account?{" "}
+					<Link href="/auth/sign-up" className="underline underline-offset-4">
+						Sign up
+					</Link>
+				</section>
+			</section>
+		</section>
 	);
 }

@@ -49,8 +49,13 @@ export default function SignUpForm() {
 	}
 
 	return (
-		<div className="mx-auto mt-10 w-full max-w-md p-6">
-			<h1 className="mb-6 text-center font-bold text-3xl">Create Account</h1>
+		<section className="mx-auto mt-10 w-full space-y-4">
+			<section className="flex w-full flex-col items-center gap-2 text-center">
+				<h1 className="font-bold text-2xl">Create an account</h1>
+				<p className="text-balance text-muted-foreground text-sm">
+					Enter your email below to create an account
+				</p>
+			</section>
 
 			<form
 				onSubmit={(e) => {
@@ -58,9 +63,9 @@ export default function SignUpForm() {
 					e.stopPropagation();
 					void form.handleSubmit();
 				}}
-				className="space-y-4"
+				className="grid gap-4"
 			>
-				<div>
+				<section>
 					<form.Field name="name">
 						{(field) => (
 							<div className="space-y-2">
@@ -80,12 +85,11 @@ export default function SignUpForm() {
 							</div>
 						)}
 					</form.Field>
-				</div>
-
-				<div>
+				</section>
+				<section>
 					<form.Field name="email">
 						{(field) => (
-							<div className="space-y-2">
+							<section className="space-y-3">
 								<Label htmlFor={field.name}>Email</Label>
 								<Input
 									id={field.name}
@@ -100,16 +104,18 @@ export default function SignUpForm() {
 										{error?.message}
 									</p>
 								))}
-							</div>
+							</section>
 						)}
 					</form.Field>
-				</div>
+				</section>
 
-				<div>
+				<section>
 					<form.Field name="password">
 						{(field) => (
-							<div className="space-y-2">
-								<Label htmlFor={field.name}>Password</Label>
+							<section className="space-y-3">
+								<section className="flex items-center">
+									<Label htmlFor={field.name}>Password</Label>
+								</section>
 								<Input
 									id={field.name}
 									name={field.name}
@@ -123,10 +129,10 @@ export default function SignUpForm() {
 										{error?.message}
 									</p>
 								))}
-							</div>
+							</section>
 						)}
 					</form.Field>
-				</div>
+				</section>
 
 				<form.Subscribe>
 					{(state) => (
@@ -140,16 +146,14 @@ export default function SignUpForm() {
 					)}
 				</form.Subscribe>
 			</form>
-
-			<div className="mt-4 text-center">
-				<Button
-					variant="link"
-					asChild
-					className="text-indigo-600 hover:text-indigo-800"
-				>
-					<Link href="/auth/sign-in">Already have an account? Sign In</Link>
-				</Button>
-			</div>
-		</div>
+			<section className="mt-4 text-center">
+				<section className="text-center text-sm">
+					Already have an account?{" "}
+					<Link href="/auth/sign-in" className="underline underline-offset-4">
+						Sign in
+					</Link>
+				</section>
+			</section>
+		</section>
 	);
 }
