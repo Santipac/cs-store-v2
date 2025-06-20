@@ -1,6 +1,45 @@
 {
-	// Configuración específica de Biome
-	"[javascript][javascriptreact][typescript][typescriptreact]": {
+	// Desactivar Prettier explícitamente
+	"prettier.enable": false,
+	"prettier.disableLanguages": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"json",
+		"jsonc"
+	],
+
+	// Formateador por defecto global
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.formatOnSave": true,
+
+	// Configuración específica de Biome para TypeScript/JavaScript
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.biome": "explicit",
+			"source.organizeImports.biome": "explicit"
+		}
+	},
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.biome": "explicit",
+			"source.organizeImports.biome": "explicit"
+		}
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll.biome": "explicit",
+			"source.organizeImports.biome": "explicit"
+		}
+	},
+	"[typescriptreact]": {
 		"editor.defaultFormatter": "biomejs.biome",
 		"editor.formatOnSave": true,
 		"editor.codeActionsOnSave": {
@@ -9,21 +48,20 @@
 		}
 	},
 
-	// Configuración general del editor
-	"editor.formatOnSave": true,
-	"editor.codeActionsOnSave": {
-		"source.fixAll": "explicit"
-	},
-
 	// Configuración específica para archivos JSON
-	"[json][jsonc]": {
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.formatOnSave": true
+	},
+	"[jsonc]": {
 		"editor.defaultFormatter": "biomejs.biome",
 		"editor.formatOnSave": true
 	},
 
-	// Configuración para archivos CSS
-	"[css][scss][less]": {
-		"editor.formatOnSave": true
+	// Configuración general del editor
+	"editor.codeActionsOnSave": {
+		"source.fixAll.biome": "explicit",
+		"source.organizeImports.biome": "explicit"
 	},
 
 	// Configuración de Tailwind CSS (para ordenar clases)

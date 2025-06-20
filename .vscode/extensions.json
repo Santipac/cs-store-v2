@@ -2,8 +2,10 @@
 	"recommendations": [
 		"biomejs.biome",
 		"bradlc.vscode-tailwindcss",
-		"ms-vscode.vscode-typescript-next",
-		"esbenp.prettier-vscode"
+		"ms-vscode.vscode-typescript-next"
 	],
-	"unwantedRecommendations": ["ms-vscode.vscode-eslint"]
+	"unwantedRecommendations": [
+		"ms-vscode.vscode-eslint",
+		"esbenp.prettier-vscode"
+	]
 }

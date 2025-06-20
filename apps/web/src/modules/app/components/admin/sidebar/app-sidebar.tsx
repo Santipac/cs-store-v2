@@ -38,7 +38,7 @@ const data = {
 		},
 		{
 			title: "Products",
-			url: "#",
+			url: "/admin/products",
 			icon: IconShoppingCart,
 		},
 		{
@@ -48,7 +48,7 @@ const data = {
 		},
 		{
 			title: "Customers",
-			url: "#",
+			url: "/admin/customers",
 			icon: IconUsers,
 		},
 	],
