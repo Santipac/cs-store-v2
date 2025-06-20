@@ -92,26 +92,3 @@ export const product = pgTable("product", {
 	updatedAt: timestamp("updated_at").notNull(),
 	soldAt: timestamp("sold_at"),
 });
-
-// Table for product categories/collections
-export const productCategory = pgTable("product_category", {
-	id: text("id").primaryKey(),
-	name: text("name").notNull(),
-	slug: text("slug").notNull().unique(),
-	description: text("description"),
-	imageUrl: text("image_url"),
-	createdAt: timestamp("created_at").notNull(),
-	updatedAt: timestamp("updated_at").notNull(),
-});
-
-// Junction table for product-category relationships
-export const productCategoryRelation = pgTable("product_category_relation", {
-	id: text("id").primaryKey(),
-	productId: text("product_id")
-		.notNull()
-		.references(() => product.id, { onDelete: "cascade" }),
-	categoryId: text("category_id")
-		.notNull()
-		.references(() => productCategory.id, { onDelete: "cascade" }),
-	createdAt: timestamp("created_at").notNull(),
-});

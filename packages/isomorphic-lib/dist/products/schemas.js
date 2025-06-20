@@ -61,12 +61,3 @@ export const productSchema = z.object({
 	updatedAt: z.date(),
 	soldAt: z.date(),
 });
-export const productCategorySchema = z.object({
-	id: z.string(),
-	name: z.string(),
-	slug: z.string(),
-	description: z.string(),
-	imageUrl: z.url(),
-	createdAt: z.date(),
-	updatedAt: z.date(),
-});

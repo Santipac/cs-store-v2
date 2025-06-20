@@ -67,19 +67,7 @@ export const productSchema = z.object({
 	soldAt: z.date(),
 });
 
-export const productCategorySchema = z.object({
-	id: z.string(),
-	name: z.string(),
-	slug: z.string(),
-	description: z.string(),
-	imageUrl: z.url(),
-	createdAt: z.date(),
-	updatedAt: z.date(),
-});
-
 export type Product = z.infer<typeof productSchema>;
-
-export type ProductCategory = z.infer<typeof productCategorySchema>;
 
 export type ProductStatus = z.infer<typeof productStatusEnum>;
 

@@ -95,20 +95,7 @@ export declare const productSchema: z.ZodObject<
 	},
 	z.core.$strip
 >;
-export declare const productCategorySchema: z.ZodObject<
-	{
-		id: z.ZodString;
-		name: z.ZodString;
-		slug: z.ZodString;
-		description: z.ZodString;
-		imageUrl: z.ZodURL;
-		createdAt: z.ZodDate;
-		updatedAt: z.ZodDate;
-	},
-	z.core.$strip
->;
 export type Product = z.infer<typeof productSchema>;
-export type ProductCategory = z.infer<typeof productCategorySchema>;
 export type ProductStatus = z.infer<typeof productStatusEnum>;
 export type ProductRarity = z.infer<typeof rarityEnum>;
 export type ProductCondition = z.infer<typeof conditionEnum>;
