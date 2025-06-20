@@ -28,7 +28,10 @@ export default function Hero() {
 						className="relative mx-auto max-w-md"
 					>
 						<Search className="-translate-y-1/2 absolute top-1/2 left-3 h-4 w-4 transform text-muted-foreground" />
-						<Input placeholder="Search for skins..." className="h-12 pl-10" />
+						<Input
+							placeholder="Search for skins..."
+							className="h-12 rounded-4xl pl-10"
+						/>
 					</motion.div>
 				</motion.div>
 			</div>
