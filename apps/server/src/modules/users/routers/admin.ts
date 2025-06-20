@@ -1,27 +1,70 @@
 import { db } from "~/db";
 import { user } from "~/db/schema/auth";
 import { adminProcedure, router } from "~/lib/trpc";
-import { eq } from "drizzle-orm";
-import z from "zod/v4";
+import { eq, count } from "drizzle-orm";
+import {
+	basePaginationQuerySchema,
+	updateUserDto,
+	type ApiSuccessResponse,
+} from "@cs-store/isomorphic-lib";
+import { z } from "zod/v4";
 
 export const adminRouter = router({
-	getAllUsers: adminProcedure.query(async () => {
-		const users = await db.select().from(user);
-		return users;
-	}),
-	updateUserRole: adminProcedure
+	getAllUsers: adminProcedure
+		.input(basePaginationQuerySchema)
+		.query(async ({ input }): Promise<ApiSuccessResponse> => {
+			if (!input) {
+				const users = await db.select().from(user);
+				return {
+					success: true,
+					data: users,
+				};
+			}
+
+			const { page, limit } = input;
+			const offset = (page - 1) * limit;
+
+			const [users, [{ totalCount }]] = await Promise.all([
+				db.select().from(user).limit(limit).offset(offset),
+				db.select({ totalCount: count() }).from(user),
+			]);
+
+			const totalPages = Math.ceil(totalCount / limit);
+
+			return {
+				success: true,
+				data: {
+					data: users,
+					meta: {
+						page,
+						limit,
+						total: totalCount,
+						totalPages,
+						hasNext: page < totalPages,
+						hasPrev: page > 1,
+					},
+				},
+			};
+		}),
+	updateUser: adminProcedure
 		.input(
 			z.object({
 				userId: z.string(),
-				role: z.enum(["customer", "admin"]),
+				...updateUserDto.shape,
 			}),
 		)
-		.mutation(async ({ input }) => {
+		.mutation(async ({ input }): Promise<ApiSuccessResponse> => {
+			const { userId, ...updateData } = input;
 			const updatedUser = await db
 				.update(user)
-				.set({ role: input.role, updatedAt: new Date() })
-				.where(eq(user.id, input.userId))
+				.set({ ...updateData, updatedAt: new Date() })
+				.where(eq(user.id, userId))
 				.returning();
-			return updatedUser[0];
+
+			return {
+				success: true,
+				data: updatedUser[0],
+				message: "User updated successfully",
+			};
 		}),
 });

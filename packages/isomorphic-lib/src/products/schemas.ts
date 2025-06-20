@@ -1,0 +1,90 @@
+import { z } from "zod/v4";
+
+export const weaponTypeEnum = z.enum([
+	"rifle",
+	"pistol",
+	"sniper",
+	"shotgun",
+	"submachine_gun",
+	"machine_gun",
+	"knife",
+	"gloves",
+]);
+
+export const conditionEnum = z.enum([
+	"factory_new",
+	"minimal_wear",
+	"field_tested",
+	"well_worn",
+	"battle_scarred",
+]);
+
+export const rarityEnum = z.enum([
+	"consumer_grade",
+	"industrial_grade",
+	"mil_spec",
+	"restricted",
+	"classified",
+	"covert",
+	"contraband",
+]);
+
+export const productStatusEnum = z.enum([
+	"available",
+	"sold",
+	"reserved",
+	"pending",
+	"trade_locked",
+]);
+
+export const productSchema = z.object({
+	id: z.string(),
+	name: z.string(),
+	weaponName: z.string(),
+	skinName: z.string(),
+	weaponType: weaponTypeEnum,
+	condition: conditionEnum,
+	rarity: rarityEnum,
+	price: z.number(),
+	floatValue: z.number(),
+	isStatTrak: z.boolean(),
+	isSouvenir: z.boolean(),
+	patternIndex: z.number().nullable(),
+	patternName: z.string().nullable(),
+	imageUrl: z.url(),
+	inspectUrl: z.url(),
+	quantity: z.number().default(1),
+	status: productStatusEnum.default("available"),
+	tradeLockUntil: z.date(),
+	collection: z.string(),
+	caseOrigin: z.string(),
+	nametag: z.string(),
+	stickers: z.string(),
+	description: z.string(),
+	tags: z.string(),
+	createdAt: z.date(),
+	updatedAt: z.date(),
+	soldAt: z.date(),
+});
+
+export const productCategorySchema = z.object({
+	id: z.string(),
+	name: z.string(),
+	slug: z.string(),
+	description: z.string(),
+	imageUrl: z.url(),
+	createdAt: z.date(),
+	updatedAt: z.date(),
+});
+
+export type Product = z.infer<typeof productSchema>;
+
+export type ProductCategory = z.infer<typeof productCategorySchema>;
+
+export type ProductStatus = z.infer<typeof productStatusEnum>;
+
+export type ProductRarity = z.infer<typeof rarityEnum>;
+
+export type ProductCondition = z.infer<typeof conditionEnum>;
+
+export type ProductWeaponType = z.infer<typeof weaponTypeEnum>;

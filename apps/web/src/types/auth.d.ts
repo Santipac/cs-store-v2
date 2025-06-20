@@ -1,4 +1,4 @@
-import type { UserRole } from "../lib/auth-client";
+import type { UserRole } from "@cs-store/isomorphic-lib";
 
 declare module "better-auth/react" {
 	interface User {

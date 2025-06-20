@@ -9,6 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
+		"@cs-store/isomorphic-lib": "workspace:*",
 		"@tanstack/react-form": "^1.3.2",
 		"@tanstack/react-query": "^5.80.5",
 		"@trpc/client": "^11.0.0",

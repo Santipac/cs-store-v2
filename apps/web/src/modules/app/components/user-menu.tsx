@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut, Settings, User } from "lucide-react";
+import { LogOut, Settings, User as UserIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
@@ -10,15 +10,16 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { authClient, type UserRole, getUserRole } from "@/lib/auth-client";
+import { authClient, getUserRole } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import type { User, UserRole } from "@cs-store/isomorphic-lib";
 
 export function UserMenu() {
 	const router = useRouter();
 	const { data: session } = authClient.useSession();
 
 	const user = session?.user;
-	const userRole = getUserRole(user);
+	const userRole = getUserRole(user as User | undefined);
 
 	const handleSignOut = async () => {
 		await authClient.signOut();
@@ -39,7 +40,7 @@ export function UserMenu() {
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button variant="ghost" className="relative h-8 w-8 rounded-full">
-					<User className="h-4 w-4" />
+					<UserIcon className="h-4 w-4" />
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-56" align="end" forceMount>

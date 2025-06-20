@@ -10,13 +10,14 @@ import {
 } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import { authClient, getUserRole } from "@/lib/auth-client";
+import type { User } from "@cs-store/isomorphic-lib";
 
 export default function AdminPage() {
 	const router = useRouter();
 	const { data: session } = authClient.useSession();
 
 	const user = session?.user;
-	const userRole = getUserRole(user);
+	const userRole = getUserRole(user as User | undefined);
 
 	useEffect(() => {
 		// Redirect if not admin

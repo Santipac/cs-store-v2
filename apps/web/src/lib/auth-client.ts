@@ -1,17 +1,5 @@
 import { createAuthClient } from "better-auth/react";
-
-export type UserRole = "customer" | "admin";
-
-export interface UserWithRole {
-	id: string;
-	name: string;
-	email: string;
-	emailVerified: boolean;
-	image?: string | null;
-	role: UserRole;
-	createdAt: Date;
-	updatedAt: Date;
-}
+import type { User, UserRole } from "@cs-store/isomorphic-lib";
 
 export const authClient = createAuthClient({
 	baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
@@ -33,7 +21,7 @@ export const hasRole = (
 };
 
 // Helper function to safely get user role
-export const getUserRole = (user: any): UserRole | null => {
+export const getUserRole = (user: User | undefined): UserRole | null => {
 	if (!user || !user.role) return null;
 	return user.role as UserRole;
 };

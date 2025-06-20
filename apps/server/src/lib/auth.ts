@@ -1,10 +1,11 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import type { UserRole } from "@cs-store/isomorphic-lib";
 import { db } from "../db";
 import * as schema from "../db/schema/auth";
 
-// Define role types
-export type UserRole = "customer" | "admin";
+// Re-export UserRole for backward compatibility
+export type { UserRole };
 
 export const auth = betterAuth({
 	database: drizzleAdapter(db, {
