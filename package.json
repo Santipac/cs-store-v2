@@ -7,6 +7,10 @@
 	],
 	"scripts": {
 		"check": "biome check --write .",
+		"format": "biome format --write .",
+		"lint": "biome lint .",
+		"lint:fix": "biome lint --write .",
+		"fix": "biome check --write --unsafe .",
 		"prepare": "husky",
 		"dev": "turbo dev",
 		"build": "turbo build",

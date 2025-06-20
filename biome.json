@@ -22,9 +22,10 @@
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab"
+		"indentStyle": "tab",
+		"formatWithErrors": true
 	},
-	"assist": { "actions": { "source": { "organizeImports": "off" } } },
+
 	"linter": {
 		"enabled": true,
 		"rules": {
@@ -47,12 +48,27 @@
 				"useAsConstAssertion": "error",
 				"useDefaultParameterLast": "error",
 				"useEnumInitializers": "error",
-				"useSelfClosingElements": "error",
+				"useSelfClosingElements": {
+					"level": "error",
+					"fix": "safe"
+				},
 				"useSingleVarDeclarator": "error",
 				"noUnusedTemplateLiteral": "error",
 				"useNumberNamespace": "error",
 				"noInferrableTypes": "error",
-				"noUselessElse": "error"
+				"noUselessElse": "error",
+				"useCollapsedElseIf": {
+					"level": "warn",
+					"fix": "safe"
+				},
+				"useConsistentArrayType": {
+					"level": "warn",
+					"fix": "safe"
+				},
+				"useFragmentSyntax": {
+					"level": "warn",
+					"fix": "safe"
+				}
 			}
 		}
 	},

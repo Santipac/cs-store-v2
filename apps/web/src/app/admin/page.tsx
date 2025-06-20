@@ -1,56 +1,37 @@
-"use client";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { ChartAreaInteractive } from "@/modules/app/components/admin/chart-area-interactive";
+import { DataTable } from "@/modules/app/components/admin/data-table";
+import { SectionCards } from "@/modules/app/components/admin/section-cards";
+import { AppSidebar } from "@/modules/app/components/admin/sidebar/app-sidebar";
+import { SiteHeader } from "@/modules/app/components/admin/site-header";
 
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
-import { useAuth } from "@/modules/auth/hooks/use-auth";
+import data from "./data.json";
 
-export default function AdminPage() {
-	const { user, userRole } = useAuth();
-
+export default function Page() {
 	return (
-		<div className="container mx-auto py-8">
-			<Card>
-				<CardHeader>
-					<CardTitle>Panel de Administración</CardTitle>
-					<CardDescription>
-						Gestión de usuarios y roles del sistema
-					</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<div className="space-y-4">
-						<div className="rounded-lg border p-4">
-							<h3 className="mb-2 font-medium">Información del Sistema</h3>
-							<p className="text-muted-foreground text-sm">
-								Bienvenido al panel de administración. Aquí podrás gestionar
-								usuarios y roles.
-							</p>
-						</div>
-
-						<div className="rounded-lg border p-4">
-							<h3 className="mb-2 font-medium">Tu Información</h3>
-							<p className="text-sm">Nombre: {user?.name}</p>
-							<p className="text-sm">Email: {user?.email}</p>
-							<p className="text-sm">
-								Rol: {userRole === "admin" ? "Administrador" : "Cliente"}
-							</p>
-						</div>
-
-						<div className="rounded-lg border p-4">
-							<h3 className="mb-2 font-medium">Funcionalidades Disponibles</h3>
-							<ul className="space-y-1 text-muted-foreground text-sm">
-								<li>• Gestión de usuarios</li>
-								<li>• Asignación de roles</li>
-								<li>• Control de acceso</li>
-							</ul>
+		<SidebarProvider
+			style={
+				{
+					"--sidebar-width": "calc(var(--spacing) * 72)",
+					"--header-height": "calc(var(--spacing) * 12)",
+				} as React.CSSProperties
+			}
+		>
+			<AppSidebar variant="inset" />
+			<SidebarInset>
+				<SiteHeader />
+				<div className="flex flex-1 flex-col">
+					<div className="@container/main flex flex-1 flex-col gap-2">
+						<div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+							<SectionCards />
+							<div className="px-4 lg:px-6">
+								<ChartAreaInteractive />
+							</div>
+							<DataTable data={data} />
 						</div>
 					</div>
-				</CardContent>
-			</Card>
-		</div>
+				</div>
+			</SidebarInset>
+		</SidebarProvider>
 	);
 }
