@@ -1,11 +1,11 @@
-import { db } from "~/db";
-import { product } from "~/db/schema/product";
-import { publicProcedure, router } from "~/lib/trpc";
 import {
 	type ApiSuccessResponse,
 	basePaginationQuerySchema,
 } from "@cs-store/isomorphic-lib";
 import { count } from "drizzle-orm";
+import { db } from "~/db";
+import { product } from "~/db/schema/product";
+import { publicProcedure, router } from "~/lib/trpc";
 
 export const productsRouter = router({
 	getAllProducts: publicProcedure

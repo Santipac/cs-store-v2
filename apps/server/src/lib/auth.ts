@@ -1,6 +1,6 @@
+import type { UserRole } from "@cs-store/isomorphic-lib";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import type { UserRole } from "@cs-store/isomorphic-lib";
 import { db } from "../db";
 import * as schema from "../db/schema/auth";
 

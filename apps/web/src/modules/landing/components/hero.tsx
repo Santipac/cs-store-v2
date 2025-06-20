@@ -1,6 +1,6 @@
-import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { motion } from "motion/react";
+import { Input } from "@/components/ui/input";
 
 export default function Hero() {
 	return (

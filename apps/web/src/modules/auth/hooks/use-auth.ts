@@ -1,5 +1,5 @@
-import { authClient, getUserRole } from "@/lib/auth-client";
 import type { User } from "@cs-store/isomorphic-lib";
+import { authClient, getUserRole } from "@/lib/auth-client";
 
 /**
  * Custom hook to access authentication state and utilities

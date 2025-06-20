@@ -1,5 +1,5 @@
-import { productsRouter } from "~/modules/products/routers";
 import { protectedProcedure, publicProcedure, router } from "~/lib/trpc";
+import { productsRouter } from "~/modules/products/routers";
 import { usersRouter } from "~/modules/users/routers";
 
 export const appRouter = router({

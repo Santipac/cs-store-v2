@@ -1,5 +1,5 @@
-import Header from "@/modules/app/components/header";
 import Footer from "@/modules/app/components/footer";
+import Header from "@/modules/app/components/header";
 
 export default function StoreLayout({
 	children,

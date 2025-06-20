@@ -1,11 +1,11 @@
 import {
-	text,
+	boolean,
+	integer,
+	pgEnum,
 	pgTable,
 	real,
-	integer,
+	text,
 	timestamp,
-	boolean,
-	pgEnum,
 } from "drizzle-orm/pg-core";
 
 export const weaponTypeEnum = pgEnum("weapon_type", [

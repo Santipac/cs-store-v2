@@ -1,6 +1,8 @@
 "use client";
 
 import { LogOut, Settings, User as UserIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
@@ -11,8 +13,6 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/modules/auth/hooks/use-auth";
-import { useRouter } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
 
 export function UserMenu() {
 	const router = useRouter();

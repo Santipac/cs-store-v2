@@ -1,10 +1,10 @@
 "use client";
+import { ShoppingCart } from "lucide-react";
 import { motion } from "motion/react";
-import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
-import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
 
 const featuredSkins = [
 	{

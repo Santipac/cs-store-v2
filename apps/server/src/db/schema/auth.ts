@@ -1,4 +1,4 @@
-import { boolean, pgTable, text, timestamp, pgEnum } from "drizzle-orm/pg-core";
+import { boolean, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 // Define role enum
 export const roleEnum = pgEnum("role", ["customer", "admin"]);

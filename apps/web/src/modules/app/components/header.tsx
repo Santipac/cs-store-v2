@@ -1,9 +1,9 @@
 "use client";
+import { Menu, ShoppingCart, X } from "lucide-react";
 import { motion } from "motion/react";
-import { Button } from "@/components/ui/button";
-import { ShoppingCart, Menu, X } from "lucide-react";
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { UserMenu } from "./user-menu";
 

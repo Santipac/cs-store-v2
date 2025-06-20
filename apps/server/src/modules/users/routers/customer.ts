@@ -1,5 +1,5 @@
-import { clientProcedure, router } from "~/lib/trpc";
 import type { ApiSuccessResponse } from "@cs-store/isomorphic-lib";
+import { clientProcedure, router } from "~/lib/trpc";
 
 export const customerRouter = router({
 	getCustomerData: clientProcedure.query(({ ctx }): ApiSuccessResponse => {
