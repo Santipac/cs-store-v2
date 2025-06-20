@@ -4,9 +4,12 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import { UserMenu } from "./user-menu";
 
 export default function Header() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const { data: session } = authClient.useSession();
 
 	return (
 		<motion.header
@@ -56,9 +59,13 @@ export default function Header() {
 							<ShoppingCart className="mr-2 h-4 w-4" />
 							Cart
 						</Button>
-						<Button size="sm" asChild>
-							<Link href="/auth/sign-in">Sign In</Link>
-						</Button>
+						{session ? (
+							<UserMenu />
+						) : (
+							<Button size="sm" asChild>
+								<Link href="/auth/sign-in">Sign In</Link>
+							</Button>
+						)}
 
 						{/* Mobile Menu Button */}
 						<Button

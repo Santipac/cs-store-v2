@@ -10,31 +10,22 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { authClient, getUserRole } from "@/lib/auth-client";
+import { useAuth } from "@/modules/auth/hooks/use-auth";
 import { useRouter } from "next/navigation";
-import type { User, UserRole } from "@cs-store/isomorphic-lib";
+import { Badge } from "@/components/ui/badge";
 
 export function UserMenu() {
 	const router = useRouter();
-	const { data: session } = authClient.useSession();
-
-	const user = session?.user;
-	const userRole = getUserRole(user as User | undefined);
+	const { isAuthenticated, user, userRole, isAdmin, signOut } = useAuth();
 
 	const handleSignOut = async () => {
-		await authClient.signOut();
-		router.push("/auth/sign-in");
+		await signOut();
+		// AuthProvider will handle the redirect
 	};
 
-	if (!session) {
+	if (!isAuthenticated) {
 		return null;
 	}
-
-	const getRoleBadgeColor = (role: UserRole) => {
-		return role === "admin"
-			? "bg-red-100 text-red-800"
-			: "bg-blue-100 text-blue-800";
-	};
 
 	return (
 		<DropdownMenu>
@@ -51,11 +42,9 @@ export function UserMenu() {
 							{user?.email}
 						</p>
 						{userRole && (
-							<span
-								className={`inline-flex items-center rounded-full px-2.5 py-0.5 font-medium text-xs ${getRoleBadgeColor(userRole)}`}
-							>
+							<Badge variant="secondary">
 								{userRole === "admin" ? "Administrador" : "Cliente"}
-							</span>
+							</Badge>
 						)}
 					</div>
 				</DropdownMenuLabel>
@@ -64,7 +53,7 @@ export function UserMenu() {
 					<Settings className="mr-2 h-4 w-4" />
 					<span>Settings</span>
 				</DropdownMenuItem>
-				{userRole === "admin" && (
+				{isAdmin && (
 					<DropdownMenuItem onClick={() => router.push("/admin")}>
 						<Settings className="mr-2 h-4 w-4" />
 						<span>Panel de Admin</span>

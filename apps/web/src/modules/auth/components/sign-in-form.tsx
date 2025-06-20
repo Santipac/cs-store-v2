@@ -28,7 +28,7 @@ export default function SignInForm() {
 				},
 				{
 					onSuccess: () => {
-						router.push("/dashboard");
+						// Let AuthProvider handle the redirect based on user role
 						toast.success("Sign in successful");
 					},
 					onError: (error) => {

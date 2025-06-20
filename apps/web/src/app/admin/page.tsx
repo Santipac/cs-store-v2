@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import {
 	Card,
 	CardContent,
@@ -8,31 +7,10 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
-import { authClient, getUserRole } from "@/lib/auth-client";
-import type { User } from "@cs-store/isomorphic-lib";
+import { useAuth } from "@/modules/auth/hooks/use-auth";
 
 export default function AdminPage() {
-	const router = useRouter();
-	const { data: session } = authClient.useSession();
-
-	const user = session?.user;
-	const userRole = getUserRole(user as User | undefined);
-
-	useEffect(() => {
-		// Redirect if not admin
-		if (session && userRole !== "admin") {
-			router.push("/dashboard");
-		}
-	}, [session, userRole, router]);
-
-	if (!session) {
-		return <div>Loading...</div>;
-	}
-
-	if (userRole !== "admin") {
-		return <div>Redirecting...</div>;
-	}
+	const { user, userRole } = useAuth();
 
 	return (
 		<div className="container mx-auto py-8">
