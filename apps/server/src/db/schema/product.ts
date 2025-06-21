@@ -46,7 +46,9 @@ export const productStatusEnum = pgEnum("product_status", [
 ]);
 
 export const product = pgTable("product", {
-	id: text("id").primaryKey(),
+	id: text("id")
+		.primaryKey()
+		.$defaultFn(() => crypto.randomUUID()),
 	name: text("name").notNull(), // e.g., "AK-47 | Redline"
 	weaponName: text("weapon_name").notNull(), // e.g., "AK-47"
 	skinName: text("skin_name").notNull(), // e.g., "Redline"
@@ -88,7 +90,11 @@ export const product = pgTable("product", {
 	tags: text("tags"), // JSON array of search tags
 
 	// Metadata
-	createdAt: timestamp("created_at").notNull(),
-	updatedAt: timestamp("updated_at").notNull(),
+	createdAt: timestamp("created_at")
+		.notNull()
+		.$defaultFn(() => new Date()),
+	updatedAt: timestamp("updated_at")
+		.notNull()
+		.$defaultFn(() => new Date()),
 	soldAt: timestamp("sold_at"),
 });

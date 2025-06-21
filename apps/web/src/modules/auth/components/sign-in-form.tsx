@@ -3,7 +3,6 @@
 import { signInDto } from "@cs-store/isomorphic-lib";
 import { useForm } from "@tanstack/react-form";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";
@@ -12,7 +11,6 @@ import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
 
 export default function SignInForm() {
-	const router = useRouter();
 	const { isPending } = authClient.useSession();
 
 	const form = useForm({

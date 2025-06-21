@@ -71,7 +71,7 @@ export declare const productSchema: z.ZodObject<
 		patternIndex: z.ZodNullable<z.ZodNumber>;
 		patternName: z.ZodNullable<z.ZodString>;
 		imageUrl: z.ZodURL;
-		inspectUrl: z.ZodURL;
+		inspectUrl: z.ZodNullable<z.ZodURL>;
 		quantity: z.ZodDefault<z.ZodNumber>;
 		status: z.ZodDefault<
 			z.ZodEnum<{
@@ -82,16 +82,16 @@ export declare const productSchema: z.ZodObject<
 				trade_locked: "trade_locked";
 			}>
 		>;
-		tradeLockUntil: z.ZodDate;
-		collection: z.ZodString;
-		caseOrigin: z.ZodString;
-		nametag: z.ZodString;
-		stickers: z.ZodString;
-		description: z.ZodString;
-		tags: z.ZodString;
+		tradeLockUntil: z.ZodNullable<z.ZodDate>;
+		collection: z.ZodNullable<z.ZodString>;
+		caseOrigin: z.ZodNullable<z.ZodString>;
+		nametag: z.ZodNullable<z.ZodString>;
+		stickers: z.ZodNullable<z.ZodString>;
+		description: z.ZodNullable<z.ZodString>;
+		tags: z.ZodNullable<z.ZodString>;
 		createdAt: z.ZodDate;
 		updatedAt: z.ZodDate;
-		soldAt: z.ZodDate;
+		soldAt: z.ZodNullable<z.ZodDate>;
 	},
 	z.core.$strip
 >;
